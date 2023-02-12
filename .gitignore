@@ -1,5 +1,6 @@
 # Local files
 startgit.cmd
+constants.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
