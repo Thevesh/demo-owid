@@ -1,6 +1,8 @@
 # Local files
 startgit.cmd
 constants.py
+prototype.py
+prototype.ipynb
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
