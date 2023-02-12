@@ -3,6 +3,8 @@ startgit.cmd
 constants.py
 prototype.py
 prototype.ipynb
+start.txt
+done.txt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
