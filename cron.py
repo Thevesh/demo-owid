@@ -43,6 +43,7 @@ if current_step < MAX_STEPS:
 for s in ['trends','retention_total','retention_regular']: telegram_image(src=f'chart_{s}.png', caption=f'Update ({s}): {tdate:%Y-%m-%d}')
 
 
-# all done, create cron blocker
+# all done, pat on the back and create cron blocker
+telegram_msg('Done for the day! 🥳🥳 Make sure you donate blood regularly too 👀')
 df = pd.DataFrame()
 df.to_csv(f'done.txt',index=False)
