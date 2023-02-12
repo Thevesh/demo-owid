@@ -25,7 +25,7 @@ def call_function(x, target=None):
 # tracker to enable modularised cron job + pick-up where left
 tracker = pd.read_csv(f'start.txt')
 current_step = tracker['now_at'].iloc[0]
-tdate = date.today() - timedelta(2)
+tdate = date.today() - timedelta(1)
 
 
 # run from where we left, as far as possible
