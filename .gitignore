@@ -5,6 +5,7 @@ prototype.py
 prototype.ipynb
 start.txt
 done.txt
+# charts/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

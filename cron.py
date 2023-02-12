@@ -32,7 +32,7 @@ tdate = date.today() - timedelta(1)
 MAX_STEPS = 3
 if current_step < MAX_STEPS:
     for i in range(current_step, MAX_STEPS):
-        res = call_function(i)
+        res = call_function(i,target=tdate)
         telegram_msg(msg=res['message'])
         if res['status'] == 1:
             tracker['now_at'] = [i + 1]
@@ -40,7 +40,7 @@ if current_step < MAX_STEPS:
         else: exit() # exit at this step if not completed
 
 # when everything is completed, send surveillance output
-for s in ['trends','retention_total','retention_regular']: telegram_image(src=f'chart_{s}.png', caption=f'Update ({s}): {tdate:%Y-%m-%d}')
+for s in ['trends','retention_total','retention_regular']: telegram_image(src=f'charts/chart_{s}.png', caption=f'Update ({s}): {tdate:%Y-%m-%d}')
 
 
 # all done, pat on the back and create cron blocker

@@ -78,7 +78,7 @@ def chart_retention():
             have made a donation
             in {toggles['df'][plot].index[-1]}.
             """, horizontalalignment='center', color='grey') # Add sample inerpretation
-            plt.savefig(f'chart_retention_{toggles["output"][plot]}.png', bbox_inches="tight", dpi=400)
+            plt.savefig(f'charts/chart_retention_{toggles["output"][plot]}.png', bbox_inches="tight", dpi=400)
             plt.close()
 
         res['status'] = 1
@@ -88,4 +88,4 @@ def chart_retention():
     
     return res
 
-print(chart_retention()) # if you need to test it modularly
+# print(chart_retention()) # if you need to test it modularly

@@ -52,7 +52,7 @@ def chart_trends(target=None):
             axes[i].set_title(f'\n{plot_range}\n')
 
         plt.suptitle('Malaysia: Daily Blood Donations')
-        plt.savefig(f'chart_trends.png', pad_inches=0.2, dpi=400)
+        plt.savefig(f'charts/chart_trends.png', pad_inches=0.2, dpi=400)
 
         res['status'] = 1
         res['message'] = f'✅ Trend chart produced'
