@@ -32,6 +32,10 @@ def chart_retention():
         # rf is the "regular" frame, defined here as >2x per year; ymmv
         rf = df.groupby(col_index).size().to_frame('n_donations').reset_index()\
             .loc[lambda x: x['n_donations'] > 2].drop('n_donations',axis=1)
+        
+        # hf is the "hardcore" frame, defined here as >5x per year; ymmv
+        hf = df.groupby(col_index).size().to_frame('n_donations').reset_index()\
+            .loc[lambda x: x['n_donations'] > 5].drop('n_donations',axis=1)
 
         # after creating rf, drop duplicates from df to get base frame
         df = df.drop_duplicates(subset=['donor_id','visit_date']).reset_index(drop=True)
@@ -42,17 +46,17 @@ def chart_retention():
         # call retention function
         df = retention_analysis(f1=df, f2=pf)
         rf = retention_analysis(f1=rf, f2=pf)
+        hf = retention_analysis(f1=hf, f2=pf)
 
         # plot charts
         toggles = {
-            'df': [df,rf],
-            'y-label': ['Donated Blood at least Once in',' Donated Blood at least 3x in'],
-            'cmap': ['Blues','Purples'],
-            'sample': ['donated at least once in','donated at least 3x in'],
-            'output': ['total','regular']
+            'df': [df,rf,hf],
+            'label': ['1x','3x','6x'],
+            'cmap': ['Blues','Purples','magma'],
+            'output': ['total','regular','hardcore']
         }
 
-        for plot in [0,1]:
+        for plot in [0,1,2]:
             fig, ax = plt.subplots(figsize=(8,6))
             fontsize = 10
             sb.set(font="Monospace")
@@ -64,7 +68,7 @@ def chart_retention():
                     vmin=0, vmax=toggles['df'][plot][1].max()+10,
                     cbar = False,
                     cbar_kws={"shrink": .9}, ax=ax)
-            ax.set_ylabel(f'{toggles["y-label"][plot]}\n')
+            ax.set_ylabel(f'Donated Blood At Least {toggles["label"][plot]} in\n')
             ax.set_xlabel('')
             ax.set_facecolor('white')
             plt.yticks(rotation=0)
@@ -74,7 +78,7 @@ def chart_retention():
             plt.text(9,11, f"""
             Sample Interpretation:\n
             Thus far, {toggles['df'][plot].iloc[-2,1]:.0f}% of those who
-            {toggles['sample'][plot]} {toggles['df'][plot].index[-2]}
+            donated at least {toggles['label'][plot].lower()} in {toggles['df'][plot].index[-2]}
             have made a donation
             in {toggles['df'][plot].index[-1]}.
             """, horizontalalignment='center', color='grey') # Add sample inerpretation
