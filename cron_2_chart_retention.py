@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import seaborn as sb
+import traceback
 import matplotlib.pyplot as plt
 
 from constants import GCS_RETENTION
@@ -46,7 +47,7 @@ def chart_retention():
         # call retention function
         df = retention_analysis(f1=df, f2=pf)
         rf = retention_analysis(f1=rf, f2=pf)
-        hf = retention_analysis(f1=hf, f2=pf)
+        # hf = retention_analysis(f1=hf, f2=pf)
 
         # plot charts
         toggles = {
@@ -56,7 +57,7 @@ def chart_retention():
             'output': ['total','regular','hardcore']
         }
 
-        for plot in [0,1,2]:
+        for plot in [0,1]:
             fig, ax = plt.subplots(figsize=(8,6))
             fontsize = 10
             sb.set(font="Monospace")
@@ -88,8 +89,8 @@ def chart_retention():
         res['status'] = 1
         res['message'] = f'✅ Retention charts produced'
     except Exception as e:
-        res['message'] = f'❌ Error while producing retention charts:\n\n{e}'
+        res['message'] = f'❌ Error while producing retention charts:\n\n{traceback.format_exc()}'
     
     return res
 
-# print(chart_retention()) # if you need to test it modularly
+print(chart_retention()) # if you need to test it modularly
