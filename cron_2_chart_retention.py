@@ -93,4 +93,4 @@ def chart_retention():
     
     return res
 
-print(chart_retention()) # if you need to test it modularly
+# print(chart_retention()) # if you need to test it modularly
